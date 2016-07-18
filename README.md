@@ -1,17 +1,15 @@
-See the main function in func.py. chongdata.utils
+It is tired to define crawler manually? You always extract the meta data by xpath?
 
-```
-from xxx.utils import read_url 
-```
+Now you can easily to extract a list of meta data from a page.
 
-is not included in this project since it is only read text from a url.
+See the example of func.py.
 
-此项目如何训练一个动态爬虫
+$ python func.py
 
-主要看func.py的main函数作为例子
+是不是很觉得每个网站提取关键字很慢？是不是每个网站要找xpath提取关键字？
 
-```
-from xxx.utils import read_url 
-```
+这个库可以动态提取关键字，只需要定义两个网页的关键字，就可以训练爬虫，然后去提取其他网页的关键字。
 
-没有包含到项目，因为只是读取一个网页。
+可以执行
+
+$ python func.py

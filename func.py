@@ -5,7 +5,10 @@ Created on Sat Jan 18 12:52:17 2014
 @author: jinpeng
 """
 import re
-from xxx.utils import read_url
+import os
+
+def read_url(url):
+    return open(url, "r").read()
 
 class KeyWordsPage(object):
     def __init__(self, page_source, key_words):
@@ -176,52 +179,26 @@ def train_key_word_partterns(key_words_pages):
 
 if __name__ == "__main__":
 
-#    with open("/tmp/page1.html", "r") as myfile:
-#        text1 = myfile.read()
-#    with open("/tmp/page2.html", "r") as myfile:
-#        text2 = myfile.read()
-#    with open("/tmp/page3.html", "r") as myfile:
-#        text3 = myfile.read()
-#
-#    key_words_pages = []
-#    page_source = text1
-#    key_words = ["Yeux", "Naked 3 Palette", "45,00"]
-#    key_words_pages.append(KeyWordsPage(page_source, key_words))
-#    page_source = text2
-#    key_words = ["Masque", "50 ml", "49,90"]
-#    key_words_pages.append(KeyWordsPage(page_source, key_words))
-#    acs = train_key_word_partterns(key_words_pages)
-#    print get_keywords_from_around_contents(text3, acs)
+    cur_dir = os.path.dirname(os.path.realpath(__file__))
+    path_product1 = os.path.join(cur_dir, "sample_page", "product1.html")
+    path_product2 = os.path.join(cur_dir, "sample_page", "product2.html")
+    path_product3 = os.path.join(cur_dir, "sample_page", "product3.html")
 
+    text1 = read_url(path_product1)
+    text2 = read_url(path_product2)
+    text3 = read_url(path_product3)
 
-#    import urllib2
-#    response = urllib2.urlopen('http://www.sephora.fr/Maquillage/Palettes-Coffrets/Yeux/Naked-3-Palette/P1641036')
-#    text1 = response.read()
-#    response = urllib2.urlopen('http://www.sephora.fr/Cheveux/Soin-Apres-shampooing/Cheveux-secs-abimes/Invati-Apres-Shampooing-Epaississant/P1477022?bl=Cheveux%3AC307_Cheveux_SephoraSelection%3A1')
-#    text2 = response.read()
-#    response = urllib2.urlopen('http://www.sephora.fr/Homme/Corps/Gel-douche-Savon/Le-Male-Gel-Douche-Corps-et-Cheveux/P54125')
-#    text3 = response.read()
-#    key_words_pages = []
-#    page_source = text1
-#    key_words = ["45,00"]
-#    key_words_pages.append(KeyWordsPage(page_source, key_words))
-#    page_source = text2
-#    key_words = ["32,00"]
-#    key_words_pages.append(KeyWordsPage(page_source, key_words))
-#    acs = train_key_word_partterns(key_words_pages)
-#    print get_keywords_from_around_contents(text3, acs)
-    
-    
-    text1 = read_url('http://detail.tmall.com/item.htm?spm=a2106.m896.1000384.7.gZUN8k&id=14900291546&source=dou&scm=1029.newlist-0.bts5.50016853&ppath=&sku=&ug=')
-    text2 = read_url('http://detail.tmall.com/item.htm?spm=a1z10.4.w5003-4460418231.7.85pu3J&id=16997347606&rn=e0361bc63f3b18e75bf53453d8516946&scene=taobao_shop')
-    text3 = read_url('http://detail.tmall.com/item.htm?spm=a1z10.4.w5003-5015214158.3.mzjSd5&id=19639665586&scene=taobao_shop')
+    ## define your cralwer by two pages
     key_words_pages = []
     page_source = text1
-    key_words = ["108.00"]
+    key_words = ["115", "15", "46"]
     key_words_pages.append(KeyWordsPage(page_source, key_words))
     page_source = text2
-    key_words = ["132.00"]
+    key_words = ["32", "55", "17"]
     key_words_pages.append(KeyWordsPage(page_source, key_words))
     acs = train_key_word_partterns(key_words_pages)
+    ## end of defining the crawler
+
+    ## you will get key words ['88', '7', '8']
     print get_keywords_from_around_contents(text3, acs)
-    pass
+    
